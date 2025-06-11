@@ -23,7 +23,7 @@ public class koneksiDB {
      
       public static Connection Getkoneksi() {
             try{
-            String url ="jdbc:mysql://localhost/dbperpus";
+            String url ="jdbc:mysql://localhost/db_perpustakaan";
             String user="root";
             String pass="";
             Class.forName("com.mysql.jdbc.Driver");

@@ -45,7 +45,7 @@ public class Jframe_User extends javax.swing.JFrame {
     private void koneksi() {//begin
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost/dbperpus", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/db_perpustakaan", "root", "");
             stat = con.createStatement();
         } catch (ClassNotFoundException | SQLException e) {
             JOptionPane.showMessageDialog(null, e);
@@ -74,7 +74,7 @@ public class Jframe_User extends javax.swing.JFrame {
     private void datatojtable() {
         DefaultTableModel tb = new DefaultTableModel();
         // Memberi nama pada setiap kolom tabel
-        tb.addColumn("Id User");
+        tb.addColumn("Username");
         tb.addColumn("Nama User");
         tb.addColumn("Password");
         tb.addColumn("Role Id");
@@ -267,10 +267,11 @@ public class Jframe_User extends javax.swing.JFrame {
         btn_hapus = new javax.swing.JButton();
         cms_keluar = new javax.swing.JButton();
         jComborole = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("ID User");
+        jLabel1.setText("Username");
 
         jLabel2.setText("Nama User");
 
@@ -293,6 +294,11 @@ public class Jframe_User extends javax.swing.JFrame {
             }
         });
 
+        txt_pass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_passActionPerformed(evt);
+            }
+        });
         txt_pass.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_passKeyPressed(evt);
@@ -348,6 +354,14 @@ public class Jframe_User extends javax.swing.JFrame {
             }
         });
 
+        jComborole.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboroleActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("USER DASBOARD");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -355,61 +369,75 @@ public class Jframe_User extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(83, 83, 83)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(11, 11, 11)
+                                    .addComponent(jLabel3))
+                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGap(25, 25, 25)
+                                .addComponent(jLabel5)))
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txt_iduser, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txt_nama, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jComborole, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txt_iduser, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
-                                        .addGap(22, 22, 22))
-                                    .addComponent(txt_pass))
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel4)
-                                .addGap(18, 18, 18)
-                                .addComponent(txt_konfirmasi, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txt_nama, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btn_simpan)
-                        .addGap(45, 45, 45)
-                        .addComponent(btn_hapus)
-                        .addGap(108, 108, 108)
-                        .addComponent(cms_keluar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(61, 61, 61)
-                        .addComponent(jComborole, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(105, Short.MAX_VALUE))
+                                        .addComponent(txt_pass, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel4)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txt_konfirmasi, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 544, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(btn_simpan)
+                                .addGap(45, 45, 45)
+                                .addComponent(btn_hapus)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cms_keluar)))
+                        .addGap(95, 95, 95))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(278, 278, 278))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(103, 103, 103)
+                .addContainerGap()
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txt_iduser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txt_nama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txt_pass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(txt_konfirmasi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(68, 68, 68)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jComborole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(txt_nama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(36, 36, 36)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(txt_pass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)
+                            .addComponent(txt_konfirmasi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(91, 91, 91))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jComborole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel5)))
+                .addGap(38, 38, 38)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55)
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_simpan)
                     .addComponent(btn_hapus)
@@ -423,31 +451,40 @@ public class Jframe_User extends javax.swing.JFrame {
 
     private void btn_simpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_simpanActionPerformed
         // TODO add your handling code here:
-        String kodeuser = txt_iduser.getText();
-        String namauser = txt_nama.getText();
-        String pass = txt_pass.getText();
-        String cpass = txt_konfirmasi.getText();
-        String roleid = jComborole.getSelectedItem().toString();
-        String roolid;
+       String kodeuser = txt_iduser.getText();
+    String namauser = txt_nama.getText();
+    String pass = txt_pass.getText();
+    String cpass = txt_konfirmasi.getText();
+    String roleid = jComborole.getSelectedItem().toString();
+    String roolid;
 
-        if (namauser.isEmpty() && kodeuser.isEmpty() && pass.isEmpty() && cpass.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Ada kolom yang masih kosong");
-            txt_iduser.requestFocus();
-        } else {
-            if (kodeuser.length() == 8) {
-                //Coding sini
-                if (pass.equals(cpass)) {
+    if (namauser.isEmpty() && kodeuser.isEmpty() && pass.isEmpty() && cpass.isEmpty()) {
+        JOptionPane.showMessageDialog(null, "Ada kolom yang masih kosong");
+        txt_iduser.requestFocus();
+    } else {
+        if (kodeuser.length() == 8) {
+            //Coding sini
+            if (pass.equals(cpass)) {
+                // Tambahkan konfirmasi sebelum menyimpan
+                int confirm = JOptionPane.showConfirmDialog(
+                    null, 
+                    "Apakah Anda yakin ingin menyimpan data ini?", 
+                    "Konfirmasi Simpan", 
+                    JOptionPane.YES_NO_OPTION
+                );
+                
+                if (confirm == JOptionPane.YES_OPTION) {
                     cekrool_id();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Password Belum Sama", "Pesan", JOptionPane.ERROR_MESSAGE);
-                    txt_konfirmasi.requestFocus();
                 }
-
             } else {
-                JOptionPane.showMessageDialog(null, "Panjang Karakter Kurang dari 8 Digit");
-                txt_iduser.requestFocus();
+                JOptionPane.showMessageDialog(null, "Password Belum Sama", "Pesan", JOptionPane.ERROR_MESSAGE);
+                txt_konfirmasi.requestFocus();
             }
-        }//end if
+        } else {
+            JOptionPane.showMessageDialog(null, "Panjang Karakter Kurang dari 8 Digit");
+            txt_iduser.requestFocus();
+        }
+    }//end if
 
 
     }//GEN-LAST:event_btn_simpanActionPerformed
@@ -520,6 +557,14 @@ public class Jframe_User extends javax.swing.JFrame {
         rool_id = jTable_user.getValueAt(selectedRow, 0).toString();
     }//GEN-LAST:event_jTable_userMouseClicked
 
+    private void txt_passActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_passActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_passActionPerformed
+
+    private void jComboroleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboroleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboroleActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -562,6 +607,7 @@ public class Jframe_User extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable_user;
     private javax.swing.JTextField txt_iduser;

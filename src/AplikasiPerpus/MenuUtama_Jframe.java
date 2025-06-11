@@ -5,6 +5,13 @@
  */
 package AplikasiPerpus;
 
+import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,12 +20,55 @@ import javax.swing.JOptionPane;
  */
 public class MenuUtama_Jframe extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MenuUtama_Jframe
-     */
-    public MenuUtama_Jframe() {
+    private String userRole;
+
+    public MenuUtama_Jframe(String role) {
+        this.userRole = role;
         initComponents();
+        setMenuAccess();
     }
+    
+    public MenuUtama_Jframe() {
+    this("1"); // Default ke admin jika tidak ada role yang diberikan
+}
+    
+    private void setMenuAccess() {
+    // Admin bisa akses semua menu
+    if ("1".equals(userRole)) { // asumsi roleid 1 adalah admin
+        return;
+    }
+    
+    // User biasa hanya bisa akses beberapa menu
+    disableMenuItem(Mconfig);
+    disableMenuItem(MKategori);
+    disableMenuItem(MRak);
+    disableMenuItem(MRole);
+    disableMenuItem(MUser);
+}
+
+private void disableMenuItem(JMenuItem menuItem) {
+    menuItem.setEnabled(false);
+    menuItem.setForeground(new Color(150, 150, 150)); // Warna abu-abu
+    // Atau jika ingin menggunakan efek transparan:
+    // menuItem.setIcon(createDisabledIcon(menuItem.getIcon()));
+}
+
+private Icon createDisabledIcon(Icon original) {
+    if (original == null) return null;
+    
+    BufferedImage img = new BufferedImage(
+        original.getIconWidth(), 
+        original.getIconHeight(), 
+        BufferedImage.TYPE_INT_ARGB
+    );
+    Graphics2D g2 = img.createGraphics();
+    original.paintIcon(null, g2, 0, 0);
+    g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
+    g2.dispose();
+    
+    return new ImageIcon(img);
+}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -29,25 +79,189 @@ public class MenuUtama_Jframe extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuBar2 = new javax.swing.JMenuBar();
+        jMenu3 = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
+        jMenu5 = new javax.swing.JMenu();
+        jMenuBar3 = new javax.swing.JMenuBar();
+        jMenu6 = new javax.swing.JMenu();
+        jMenu7 = new javax.swing.JMenu();
+        jMenuBar4 = new javax.swing.JMenuBar();
+        jMenu8 = new javax.swing.JMenu();
+        jMenu9 = new javax.swing.JMenu();
+        jMenuBar5 = new javax.swing.JMenuBar();
+        jMenu10 = new javax.swing.JMenu();
+        jMenu11 = new javax.swing.JMenu();
+        jMenuBar6 = new javax.swing.JMenuBar();
+        jMenu12 = new javax.swing.JMenu();
+        jMenu13 = new javax.swing.JMenu();
+        jMenu14 = new javax.swing.JMenu();
+        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
+        jMenuBar7 = new javax.swing.JMenuBar();
+        jMenu15 = new javax.swing.JMenu();
+        jMenu16 = new javax.swing.JMenu();
+        jMenuBar8 = new javax.swing.JMenuBar();
+        jMenu17 = new javax.swing.JMenu();
+        jMenu18 = new javax.swing.JMenu();
+        jMenuBar9 = new javax.swing.JMenuBar();
+        jMenu19 = new javax.swing.JMenu();
+        jMenu20 = new javax.swing.JMenu();
+        jMenu21 = new javax.swing.JMenu();
+        jMenuBar10 = new javax.swing.JMenuBar();
+        jMenu22 = new javax.swing.JMenu();
+        jMenu23 = new javax.swing.JMenu();
+        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+        Manggota = new javax.swing.JMenuItem();
+        MDataBuku = new javax.swing.JMenuItem();
+        MEksemplar = new javax.swing.JMenuItem();
+        MPeminjaman = new javax.swing.JMenuItem();
+        Mconfig = new javax.swing.JMenuItem();
+        MKategori = new javax.swing.JMenuItem();
+        MRak = new javax.swing.JMenuItem();
         MRole = new javax.swing.JMenuItem();
         MUser = new javax.swing.JMenuItem();
         MKeluar = new javax.swing.JMenuItem();
 
+        jMenu3.setText("File");
+        jMenuBar2.add(jMenu3);
+
+        jMenu4.setText("Edit");
+        jMenuBar2.add(jMenu4);
+
+        jMenu5.setText("jMenu5");
+
+        jMenu6.setText("File");
+        jMenuBar3.add(jMenu6);
+
+        jMenu7.setText("Edit");
+        jMenuBar3.add(jMenu7);
+
+        jMenu8.setText("File");
+        jMenuBar4.add(jMenu8);
+
+        jMenu9.setText("Edit");
+        jMenuBar4.add(jMenu9);
+
+        jMenu10.setText("File");
+        jMenuBar5.add(jMenu10);
+
+        jMenu11.setText("Edit");
+        jMenuBar5.add(jMenu11);
+
+        jMenu12.setText("File");
+        jMenuBar6.add(jMenu12);
+
+        jMenu13.setText("Edit");
+        jMenuBar6.add(jMenu13);
+
+        jMenu14.setText("jMenu14");
+
+        jCheckBoxMenuItem1.setSelected(true);
+        jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
+
+        jMenu15.setText("File");
+        jMenuBar7.add(jMenu15);
+
+        jMenu16.setText("Edit");
+        jMenuBar7.add(jMenu16);
+
+        jMenu17.setText("File");
+        jMenuBar8.add(jMenu17);
+
+        jMenu18.setText("Edit");
+        jMenuBar8.add(jMenu18);
+
+        jMenu19.setText("File");
+        jMenuBar9.add(jMenu19);
+
+        jMenu20.setText("Edit");
+        jMenuBar9.add(jMenu20);
+
+        jMenu21.setText("jMenu21");
+
+        jMenu22.setText("File");
+        jMenuBar10.add(jMenu22);
+
+        jMenu23.setText("Edit");
+        jMenuBar10.add(jMenu23);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistem Informasi Perpusatkaan");
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\pemrograman Dekstop\\perpus.jpg")); // NOI18N
+        jButton1.setText("jButton1");
 
-        jMenu1.setText("File");
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Asus\\Downloads\\Frame 1.png")); // NOI18N
+
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Data Master");
+        jMenu2.setBackground(new java.awt.Color(255, 255, 255));
+        jMenu2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jMenu2.setText("MENU");
+        jMenu2.setMargin(new java.awt.Insets(10, 10, 10, 10));
+        jMenu2.setMaximumSize(new java.awt.Dimension(70, 100));
+        jMenu2.setPreferredSize(new java.awt.Dimension(43, 33));
 
-        MRole.setText("Role User");
+        Manggota.setText("Anggota");
+        Manggota.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ManggotaActionPerformed(evt);
+            }
+        });
+        jMenu2.add(Manggota);
+
+        MDataBuku.setText("Data Buku");
+        MDataBuku.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MDataBukuActionPerformed(evt);
+            }
+        });
+        jMenu2.add(MDataBuku);
+
+        MEksemplar.setText("Eksemplar");
+        MEksemplar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MEksemplarActionPerformed(evt);
+            }
+        });
+        jMenu2.add(MEksemplar);
+
+        MPeminjaman.setText("Peminjaman");
+        MPeminjaman.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MPeminjamanActionPerformed(evt);
+            }
+        });
+        jMenu2.add(MPeminjaman);
+
+        Mconfig.setText("Config");
+        Mconfig.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MconfigActionPerformed(evt);
+            }
+        });
+        jMenu2.add(Mconfig);
+
+        MKategori.setText("Kategori");
+        MKategori.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MKategoriActionPerformed(evt);
+            }
+        });
+        jMenu2.add(MKategori);
+
+        MRak.setText("Rak");
+        MRak.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MRakActionPerformed(evt);
+            }
+        });
+        jMenu2.add(MRak);
+
+        MRole.setText("role User");
         MRole.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MRoleActionPerformed(evt);
@@ -80,16 +294,14 @@ public class MenuUtama_Jframe extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jLabel1)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1961, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addComponent(jLabel1)
-                .addContainerGap(131, Short.MAX_VALUE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1051, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 57, Short.MAX_VALUE))
         );
 
         pack();
@@ -118,6 +330,55 @@ public class MenuUtama_Jframe extends javax.swing.JFrame {
         role.setVisible(true); // Berfungsi untuk membuat form input data terlihat atau terpanggil.
    
     }//GEN-LAST:event_MRoleActionPerformed
+
+    private void MKategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MKategoriActionPerformed
+        // TODO add your handling code here:
+        Jfram_kategory kategori = new Jfram_kategory();
+        kategori.setLocationRelativeTo(null); // biar form berada di posisi tengah
+        kategori.setVisible(true); // Berfungsi untuk membuat form input data terlihat atau terpanggil.
+    }//GEN-LAST:event_MKategoriActionPerformed
+
+    private void MRakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MRakActionPerformed
+        // TODO add your handling code here:
+        Jframe_RakBuku rak = new Jframe_RakBuku();
+        rak.setLocationRelativeTo(null); // biar form berada di posisi tengah
+        rak.setVisible(true); // Berfungsi untuk membuat form input data terlihat atau terpanggil.
+    }//GEN-LAST:event_MRakActionPerformed
+
+    private void MDataBukuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MDataBukuActionPerformed
+        // TODO add your handling code here:
+        Jframe_MasterBuku buku = new Jframe_MasterBuku();
+        buku.setLocationRelativeTo(null); // biar form berada di posisi tengah
+        buku.setVisible(true); // Berfungsi untuk membuat form input data terlihat atau terpanggil.
+    }//GEN-LAST:event_MDataBukuActionPerformed
+
+    private void MEksemplarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MEksemplarActionPerformed
+        // TODO add your handling code here:
+        Jframe_Eksemplar eksemplar = new Jframe_Eksemplar();
+        eksemplar.setLocationRelativeTo(null); // biar form berada di posisi tengah
+        eksemplar.setVisible(true); // Berfungsi untuk membuat form input data terlihat atau terpanggil.
+    }//GEN-LAST:event_MEksemplarActionPerformed
+
+    private void ManggotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManggotaActionPerformed
+        // TODO add your handling code here:
+        JFrame_Anggota anggota = new JFrame_Anggota();
+        anggota.setLocationRelativeTo(null); // biar form berada di posisi tengah
+        anggota.setVisible(true); // Berfungsi untuk membuat form input data terlihat atau terpanggil.
+    }//GEN-LAST:event_ManggotaActionPerformed
+
+    private void MPeminjamanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MPeminjamanActionPerformed
+        // TODO add your handling code here:
+        Jframe_Pinjam pinjam = new Jframe_Pinjam();
+        pinjam.setLocationRelativeTo(null); // biar form berada di posisi tengah
+        pinjam.setVisible(true); // Berfungsi untuk membuat form input data terlihat atau terpanggil.
+    }//GEN-LAST:event_MPeminjamanActionPerformed
+
+    private void MconfigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MconfigActionPerformed
+        // TODO add your handling code here:
+        Jframe_config config = new Jframe_config();
+        config.setLocationRelativeTo(null); // biar form berada di posisi tengah
+        config.setVisible(true); // Berfungsi untuk membuat form input data terlihat atau terpanggil.
+    }//GEN-LAST:event_MconfigActionPerformed
 
     /**
      * @param args the command line arguments
@@ -155,12 +416,51 @@ public class MenuUtama_Jframe extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem MDataBuku;
+    private javax.swing.JMenuItem MEksemplar;
+    private javax.swing.JMenuItem MKategori;
     private javax.swing.JMenuItem MKeluar;
+    private javax.swing.JMenuItem MPeminjaman;
+    private javax.swing.JMenuItem MRak;
     private javax.swing.JMenuItem MRole;
     private javax.swing.JMenuItem MUser;
+    private javax.swing.JMenuItem Manggota;
+    private javax.swing.JMenuItem Mconfig;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu10;
+    private javax.swing.JMenu jMenu11;
+    private javax.swing.JMenu jMenu12;
+    private javax.swing.JMenu jMenu13;
+    private javax.swing.JMenu jMenu14;
+    private javax.swing.JMenu jMenu15;
+    private javax.swing.JMenu jMenu16;
+    private javax.swing.JMenu jMenu17;
+    private javax.swing.JMenu jMenu18;
+    private javax.swing.JMenu jMenu19;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu20;
+    private javax.swing.JMenu jMenu21;
+    private javax.swing.JMenu jMenu22;
+    private javax.swing.JMenu jMenu23;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
+    private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMenuBar10;
+    private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuBar jMenuBar3;
+    private javax.swing.JMenuBar jMenuBar4;
+    private javax.swing.JMenuBar jMenuBar5;
+    private javax.swing.JMenuBar jMenuBar6;
+    private javax.swing.JMenuBar jMenuBar7;
+    private javax.swing.JMenuBar jMenuBar8;
+    private javax.swing.JMenuBar jMenuBar9;
     // End of variables declaration//GEN-END:variables
 }
